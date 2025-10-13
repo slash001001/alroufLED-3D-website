@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Immersive multi-layer 3D presentation for the alroufLED street light collection."
+    />
+    <title>alroufLED Street Light Experience</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="preload"
+      as="image"
+      href="290W%20(1).png"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="50-240W%20(7).png"
+    />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-nav" data-reveal>
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <span class="brand-name">alroufLED</span>
+        </div>
+        <nav class="top-nav__links">
+          <a href="#vision">Vision</a>
+          <a href="#layers">Layers</a>
+          <a href="#engineering">Engineering</a>
+          <a href="#cta">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" id="vision">
+          <div class="hero__content" data-reveal>
+            <p class="eyebrow">Flagship Street Illumination</p>
+            <h1>
+              Street lighting,
+              <span class="accent">reimagined in 3D.</span>
+            </h1>
+            <p>
+              Meet the next generation alroufLED street light—engineered for
+              precision, efficiency, and architectural presence. Glide through
+              multi-layer visuals that highlight the craft behind every lumen.
+            </p>
+            <div class="cta-group">
+              <a class="cta-primary" href="#layers">Explore Layers</a>
+              <button class="cta-secondary" type="button" data-scroll-to="#engineering">
+                See Engineering
+              </button>
+            </div>
+          </div>
+
+          <div class="hero__visual" data-reveal>
+            <div class="hero__backdrop"></div>
+            <div class="hero__stage" data-parallax>
+              <div class="stage-layer layer-glow" data-depth="0.08"></div>
+              <img
+                class="stage-layer layer-main"
+                data-depth="0.22"
+                src="290W%20(1).png"
+                alt="alroufLED flagship street light"
+              />
+              <img
+                class="stage-layer layer-lightfield"
+                data-depth="0.32"
+                src="50-240W%20(5).png"
+                alt="Light diffusion pattern"
+              />
+              <div class="stage-layer layer-shadow" data-depth="-0.12" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="storyline" id="layers">
+          <div class="storyline__grid">
+            <article class="story-card" data-reveal>
+              <h2>Layer 01 — Optics</h2>
+              <p>
+                Sculpted reflector geometry channels every photon with intent.
+                The smooth anodized housing minimizes glare while directing
+                light precisely onto the carriageway.
+              </p>
+            </article>
+            <article class="story-card" data-reveal>
+              <h2>Layer 02 — Thermal Core</h2>
+              <p>
+                A finely finned heat-sink dissipates warmth in three axes,
+                enabling higher lumen density without compromise to lifespan.
+              </p>
+            </article>
+            <article class="story-card" data-reveal>
+              <h2>Layer 03 — Intelligence</h2>
+              <p>
+                Adaptive drivers listen to citywide networks, modulating output
+                in response to evolving urban rhythms and ambient light.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="layered-gallery">
+          <div class="gallery-stage" data-parallax>
+            <img
+              class="gallery-layer gallery-base"
+              data-depth="0.12"
+              src="50-240W%20(7).png"
+              alt="alroufLED modular street light 240W variant"
+            />
+            <img
+              class="gallery-layer gallery-overlay"
+              data-depth="0.24"
+              src="50-240W%20(8).png"
+              alt="alroufLED exploded module detail"
+            />
+            <img
+              class="gallery-layer gallery-highlight"
+              data-depth="0.34"
+              src="50-240W%20(6).png"
+              alt="alroufLED control module detail"
+            />
+          </div>
+          <div class="gallery-copy" data-reveal>
+            <h2>Immersive 3D storytelling</h2>
+            <p>
+              Slide between perspectives as layered imagery responds to movement,
+              revealing how each component integrates into a cohesive lighting
+              system with Apple-grade polish.
+            </p>
+          </div>
+        </section>
+
+        <section class="engineering" id="engineering">
+          <div class="engineering__panel" data-reveal>
+            <h2>Precision-engineered backbone</h2>
+            <ul>
+              <li>
+                <strong>Monolith chassis</strong> CNC-machined aluminum body with
+                seamless powder coating for coastal resilience.
+              </li>
+              <li>
+                <strong>Adaptive lumen logic</strong> Smart sensors regulate
+                brightness while maintaining a consistent color temperature curve.
+              </li>
+              <li>
+                <strong>Service-first approach</strong> Magnetic access door and
+                tool-free driver swaps keep downtime to a minimum.
+              </li>
+            </ul>
+          </div>
+          <div class="engineering__visual" data-reveal>
+            <div class="engineering-card" data-tilt>
+              <div class="card-backdrop"></div>
+              <img
+                src="50-240W%20(5).png"
+                alt="alroufLED street light fins"
+              />
+              <div class="card-copy">
+                <h3>Heat dispersion mastered</h3>
+                <p>
+                  Fanned architecture elevates cooling surface area by 28%,
+                  sustaining peak output in demanding climates.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="metrics" data-reveal>
+          <div class="metric">
+            <p class="metric-label">Peak efficacy</p>
+            <p class="metric-value">178 lm/W</p>
+          </div>
+          <div class="metric">
+            <p class="metric-label">Control protocols</p>
+            <p class="metric-value">DALI 2 · PLC · LTE</p>
+          </div>
+          <div class="metric">
+            <p class="metric-label">Operating range</p>
+            <p class="metric-value">-45°C to 55°C</p>
+          </div>
+          <div class="metric">
+            <p class="metric-label">Projected life</p>
+            <p class="metric-value">120,000 hrs</p>
+          </div>
+        </section>
+      </main>
+
+      <section class="cta" id="cta">
+        <div class="cta__panel" data-reveal>
+          <h2>Ready to light the street of the future?</h2>
+          <p>
+            Assemble a custom configuration with our lighting design studio.
+            Swap optics, map photometrics, and visualize installations in AR.
+          </p>
+          <div class="cta__actions">
+            <a class="cta-primary" href="mailto:design@alroufled.com">Book a session</a>
+            <a class="cta-secondary" href="#vision">Replay presentation</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>© <span data-year></span> alroufLED. Crafted for night and narrative.</p>
+      </footer>
+    </div>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
