@@ -9,11 +9,8 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "model:step": "freecadcmd tools/convert_step_to_obj.py assets/ufo5-200W.stp public/models/ufo5-200W.obj",
-    "model:glb": "npx obj2gltf -i public/models/ufo5-200W.obj -o public/models/ufo5-200W.glb --binary",
-    "model:compress": "node tools/postprocess-glb.mjs public/models/ufo5-200W.glb",
-    "model:clean": "node -e \"const fs=require('fs');try{fs.unlinkSync('public/models/ufo5-200W.obj');}catch(_){}\"",
-    "model:build": "npm run model:step && npm run model:glb && npm run model:compress && npm run model:clean"
+    "model:build": "node tools/build-model.mjs",
+    "model:placeholder": "node tools/build-model.mjs --placeholder"
   },
   "dependencies": {
     "@react-three/drei": "^9.93.0",

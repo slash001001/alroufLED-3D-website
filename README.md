@@ -23,48 +23,35 @@ Output is written to `dist/`.
 
 Source CAD: `assets/ufo5-200W.stp`
 
-1. Convert STEP → OBJ with FreeCAD (CLI):
+Generate / refresh the GLB:
 
-   ```bash
-   npm run model:step
-   ```
+```bash
+npm run model:build
+```
 
-   Required: `freecadcmd` available on the host.
+What the script does:
 
-2. Convert OBJ → GLB:
+- Detects whether `freecadcmd` is installed.
+  - If available, it converts the STEP → OBJ → GLB, applies Draco + Meshopt compression, and writes the result to both `public/models/` and `docs/models/`.
+  - If FreeCAD is missing, it falls back to a procedurally generated placeholder GLB so the viewer keeps working (helpful on machines without CAD tooling).
+- Cleans up temporary OBJ files.
 
-   ```bash
-   npm run model:glb
-   ```
+Need the placeholder only? Use `npm run model:placeholder`.
 
-   Uses `obj2gltf` (installed locally).
-
-3. Compress with Draco + Meshopt:
-
-   ```bash
-   npm run model:compress
-   ```
-
-4. Run the full pipeline and clean temporary OBJ in one step:
-
-   ```bash
-   npm run model:build
-   ```
-
-A successful run produces `public/models/ufo5-200W.glb`. The viewer includes a runtime error boundary that reminds contributors to generate the asset if it is missing.
+> Install FreeCAD on macOS with `brew install --cask freecad` (make sure `FreeCADCmd` is on your `$PATH`).
 
 ### Alternative: Blender decimation
 
-When you need finer control over topology, use Blender headless:
+When you need finer control over topology, convert the STEP (or any OBJ you produce manually) inside Blender headless:
 
 ```bash
 blender --background --python tools/blender_obj_to_glb.py -- \
-  --input public/models/ufo5-200W.obj \
+  --input path/to/ufo5-200W.obj \
   --output public/models/ufo5-200W.glb \
   --decimate 0.35
 ```
 
-Then run the compression step.
+Then run the compression step by executing `npm run model:build` again (it will detect the new GLB and recompress it).
 
 ## Viewer architecture
 
