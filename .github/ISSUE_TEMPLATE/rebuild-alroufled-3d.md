@@ -1,202 +1,185 @@
 ---
-name: Rebuild alroufLED 3D Website — Full Redesign & Replatform
-about: تكليف لأنيس لإعادة بناء موقع alroufLED ثلاثي الأبعاد بواجهة فاتحة وفق أفضل الممارسات
-title: Rebuild alroufLED 3D Website — Full Redesign & Replatform (Light UI, 3D-first, Best Practices)
+name: Replace parallax with a real 3D product viewer (ufo5‑200W)
+about: تكليف مباشر لأنيس لاستبدال حركة الـ PNG بعرض 3D حقيقي مضغوط مع R3F + خط أنابيب GLB
+title: Replace parallax with a real 3D product viewer (ufo5‑200W) — R3F + GLB pipeline
 assignees: Anis
-labels: enhancement, redesign
+labels: feature, 3D, priority:high, marketing, UX, performance
 ---
 
 **Assignee:** @Anis  
-**Role:** أنت تعمل هنا كمزيج من: **Full‑Stack Developer + Product Designer + Marketing Lead**.
+**Milestone:** 3D Launch
 
-### 0) السياق & الموجود حاليًا
+### Context (what exists today)
 
-لدينا ريبو باسم **alroufLED-3D-website** يحتوي (بحسب الوضع الحالي):
+* The live homepage “movement” is **2D parallax** (see `index.html:43`, `app.js:3`) moving PNG layers on pointer move.
+* `docs/factory.js` is an **old experimental Three.js scene** that renders abstract geometry; it’s **not** connected to the homepage and **not** the ufo5 luminaire.
+* There is **no real 3D model** or interactive viewer on production yet.
 
-* صفحات ثابتة: `index.html`, `styles.css`, `app.js`
-* صور منتجات: سلسلة صور `50-240W (1..8).png` وملفات داخل `docs/`
-* ملف CAD: **`ufo5-200W.stp`** (الموديل المعتمد)
-* نشر GitHub Pages مفعل (Workflow موجود)
-  المطلوب: **إعادة تنظيم، ثم تصميم وتطوير** موقع 3D تفاعلي بخلفية **فاتحة** وفق أفضل الممارسات، مع جاهزية تسويق وقياس أداء.
+**This issue delivers the missing 3D experience**: convert the STEP model to GLB (compressed), build a React Three Fiber (R3F) viewer, wire it into the homepage hero, add fallbacks + analytics + SEO/perf best practices. Remove all parallax hacks.
 
 ---
 
-### 1) الهدف
+### Goals
 
-* بناء **تجربة ويب تفاعلية** لمنتجات الإنارة (ufo5-200W أساسًا + بقية القدرات 50–240W) مع **عارض 3D** في القلب.
-* واجهة **فاتحة وخفيفة** (Light theme)، عصرية، سهلة القراءة بالعربية والإنجليزية، وداعمة لـ **RTL/LTR**.
-* **سرعة وأداء** عاليان (Lighthouse ≥ 95، LCP < 2.5s، CLS < 0.1)، **SEO ممتاز**، وتجهيز كامل للتسويق وتتبع التحويلات.
-* بنية كود معيارية، CI/CD نظيف، وقابلية توسّع مستقبلية.
-
----
-
-### 2) مخرجات مطلوبة (Deliverables)
-
-1. **إعادة منصة** إلى **Next.js 14+ (App Router)** + **TypeScript** + **Tailwind CSS**.
-
-   * بدائل: لو أردت بساطة، استخدم Vite + React؛ لكن نفضّل Next للـ SEO و i18n والـ SSR.
-2. **عارض 3D** مبني بـ **React Three Fiber (r3f)** + **@react-three/drei** + **Three.js**:
-
-   * تحميل نموذج المنتج **ufo5-200W.glb** (سنحوّله من STEP).
-   * تحكّم Orbit، إضاءة جيدة، خلفية فاتحة (#F7F8FA مثلاً)، ظل أرضي، وواجهة صغيرة: Wireframe/Auto‑Rotate/Reset/Download.
-   * **Fallback** تلقائي للأجهزة الضعيفة: صورة 360°/فيديو قصير أو معرض صور.
-3. **بايبلاين 3D**:
-
-   * تحويل `assets/ufo5-200W.stp` → OBJ (FreeCAD CLI) → GLB (obj2gltf أو Blender)، مع **Draco** + **Meshopt** + **KTX2** (إن وجِدت خامات).
-   * سكربتات CLI + GitHub Actions تؤتمت التحويل عند أي تحديث للـ STEP.
-4. **تصميم واجهة وهوية (Light Theme)**:
-
-   * نظام ألوان فاتح، درجات رمادي محايدة (Text #111، Body #444، Surface #FFFFFF/#FAFAFA).
-   * **Design tokens** عبر CSS Variables، ومكوّنات UI قابلة لإعادة الاستخدام (Buttons، Cards، Section Header…).
-   * **RTL/LTR** عبر `dir` و i18n (ar/en) باستخدام `next-intl` أو `next-i18next`.
-5. **هيكل معلومات (IA) وصفحات**:
-
-   * `/` صفحة هيرو + قيمة المنتج + معاينة 3D.
-   * `/products/ufo5-200W` صفحة منتج متعمقة (3D + المواصفات + صور + تنزيل كتيّب PDF).
-   * `/products/[power]` لنسخ 50–240W (مولّد صفحات ديناميكي من `data/products.json`).
-   * `/about`, `/contact` (نموذج Leads + WhatsApp CTA).
-   * `/viewer` صفحة عرض 3D كاملة الشاشة.
-6. **SEO/Marketing**:
-
-   * Meta + OpenGraph + Twitter Cards + **schema.org/Product**.
-   * خريطة موقع + robots.txt + عناوين URL نظيفة.
-   * **Analytics**: GA4 + Meta Pixel + تحويلات (CTA/WhatsApp/تحميلات).
-   * UTM تلقائي لأزرار الحملة.
-7. **الأداء وإمكانية الوصول**:
-
-   * Lazy‑load لكل شيء غير أساسي، **code‑splitting**، prefetch الذكي.
-   * WebGL في **Web Worker** إن أمكن (Draco/Meshopt loaders).
-   * A11y: تباين ألوان، مفاتيح لوحة مفاتيح، ARIA للواجهة.
-8. **CI/CD**:
-
-   * GitHub Actions: lint/test/build/Lighthouse CI (مخبري)، تحويل 3D، ونشر Pages/Vercel.
-9. **وثائق**:
-
-   * README مفصّل (تشغيل/تحويل/نشر)، **CONTRIBUTING.md**، **Issue/PR templates**.
-
-**Definition of Done (DoD)**
-
-* Lighthouse (Mobile) ≥ 95/100 لكل Performance/SEO/Best‑Practices/Accessibility.
-* CLS < 0.1، LCP < 2.5s (على 4G محاكى)، TBT < 200ms.
-* 3D يعمل على أحدث iOS/Android وChrome/Edge/Safari مع fallback للأجهزة الضعيفة.
-* i18n (ar/en) كاملة + RTL/LTR سليم.
-* Analytics/Pixel تعمل وتُسجّل أهداف التحويل (نقرات CTA/WhatsApp/تحميل GLB/PDF).
-* CI/CD أخضر للنشر التلقائي.
+1. Show the **actual ufo5‑200W** in the homepage hero as a **real 3D viewer** (React Three Fiber).
+2. **Light theme** across the hero (very light background #F7F8FA / #FFFFFF) with good contrast.
+3. Ship a **compressed GLB** (Draco + Meshopt) with a smooth interaction on modern mobile/desktop.
+4. Remove parallax code and the old `docs/factory.js` experiment from the live path.
+5. Add **fallbacks** (360° sprite or poster) for low‑end devices.
+6. Track key **analytics events** (viewer interactions, downloads, CTA clicks).
+7. Keep **Lighthouse** (mobile) ≥ 95 for Performance/SEO/Best‑Practices/Accessibility.
 
 ---
 
-### 3) خطة التنفيذ (خطوات مرتبة)
+### Deliverables
 
-**المرحلة A — التحليل والتنظيف (Repo Audit)**
+* ✅ **3D pipeline**: `assets/ufo5-200W.stp` → `public/models/ufo5-200W.glb`
 
-* [ ] جرد الملفات الحالية (HTML/CSS/JS/PNG/STP). نقل الوسائط إلى `public/` وبيانات المنتجات إلى `data/products.json`.
-* [ ] حدد ما سيُعاد استخدامه وما سيُستبدل.
+  * CLI scripts (FreeCAD for STEP→OBJ, obj2gltf or Blender for OBJ→GLB).
+  * Draco + Meshopt compression; optional KTX2 textures if any appear.
+  * A GitHub Action to auto-convert on push of `.stp` (artifact committed to `public/models/`).
+* ✅ **Viewer**: React Three Fiber + @react-three/drei
 
-**المرحلة B — الهيكلة**
+  * Orbit controls, soft lighting (hemisphere + key directional), ground/receiveShadow (subtle), light background.
+  * UI toggles: **Wireframe**, **Auto-rotate**, **Reset view**, **Download GLB**.
+  * Fit-to-frame + persist last camera via `localStorage`.
+* ✅ **Homepage integration**: Replace current parallax hero with the 3D viewer component.
+* ✅ **Fallback**: Use `detect-gpu` gating; if tier is low/no WebGL → show 360° sprite (or static hero) + “Open 3D viewer” button route.
+* ✅ **Analytics**: GA4 events: `viewer_open`, `viewer_rotate`, `viewer_wireframe`, `glb_download`, plus CTA events.
+* ✅ **Cleanup**: Remove the parallax JS (`index.html:43`, `app.js:3`) and exclude `docs/factory.js` from the live bundle.
+* ✅ **Docs**: README section “3D pipeline & viewer” with commands and troubleshooting.
 
-* [ ] إنشاء مشروع Next.js + TS + Tailwind + ESLint + Prettier.
-* [ ] بنية مجلدات:
+---
 
+### Acceptance Criteria (Definition of Done)
+
+* [ ] Homepage hero renders **ufo5‑200W.glb** (not PNG layers).
+* [ ] `index.html:43` and `app.js:3` parallax logic **removed**; `docs/factory.js` not loaded anywhere in production.
+* [ ] 3D interaction **smooth** on recent iOS/Android + desktop (target 60 fps where possible; no jank).
+* [ ] GLB size **≤ ~5–8 MB** after Draco/Meshopt (or justify if larger).
+* [ ] Fallback path works (no WebGL → 360° or static poster).
+* [ ] GA4 receives the listed events on real interactions.
+* [ ] Lighthouse (mobile) ≥ 95 on all categories; Web Vitals within budget (LCP < 2.5s, CLS < 0.1, TBT < 200 ms).
+* [ ] Code passes ESLint/Prettier; CI green; Pages deployment succeeds.
+
+---
+
+### Tech Choices (current best practices)
+
+* **Viewer:** React Three Fiber (`@react-three/fiber`) + `@react-three/drei`, `three@latest`.
+* **Compression:** `gltf-pipeline` (Draco), `meshoptimizer` (meshopt).
+* **Fallback detection:** `detect-gpu` (pmndrs) + feature detect for WebGL2 → choose viewer or fallback.
+* **Bundling:** Keep current hosting (GitHub Pages). You can integrate R3F via a small React entry (Vite build) emitted into `/public/` and referenced by homepage, or migrate to Next.js static export if needed.
+* **Telemetry:** GA4 (and Meta Pixel if configured). Fire custom events from the viewer UI.
+
+---
+
+### File/Folder Plan (incremental, no big‑bang)
+
+```
+/assets
+  ufo5-200W.stp
+/public
+  /models/ufo5-200W.glb        # built artifact (compressed)
+  /sprites/ufo5-200W-360/*.png # optional fallback sprite
+/src
+  /3d/ProductViewer.tsx        # R3F component (viewer)
+  /3d/loaders.ts               # GLTF/Draco/Meshopt setup
+  /ui/ViewerHud.tsx            # UI toggles
+  analytics.ts                 # GA4 helpers (events)
+  main.tsx                     # React entry (hydrate viewer in homepage)
+/tools
+  convert_step_to_obj.py       # FreeCAD CLI
+  blender_obj_to_glb.py        # Blender headless (OBJ->GLB)
+/.github/workflows
+  convert-and-deploy.yml       # auto pipeline for STEP->GLB + deploy
+```
+
+---
+
+### Tasks & Checklists
+
+**A) 3D Pipeline**
+
+* [ ] Add `/tools/convert_step_to_obj.py` (FreeCAD) and `/tools/blender_obj_to_glb.py`.
+* [ ] Local run:
+
+  ```bash
+  freecadcmd tools/convert_step_to_obj.py assets/ufo5-200W.stp public/models/ufo5-200W.obj
+  npx obj2gltf -i public/models/ufo5-200W.obj -o public/models/ufo5-200W.glb
+  npx gltf-pipeline -i public/models/ufo5-200W.glb -o public/models/ufo5-200W.draco.glb -d
+  mv -f public/models/ufo5-200W.draco.glb public/models/ufo5-200W.glb
   ```
-  /app (App Router)
-    /(main)/page.tsx
-    /products/[slug]/page.tsx
-    /viewer/page.tsx
-    /about/page.tsx
-    /contact/page.tsx
-  /components (UI + 3D)
-  /lib (utils, analytics)
-  /public (images, models, icons)
-  /data/products.json
-  /styles/globals.css
-  ```
-* [ ] إعداد i18n (ar/en) + تبديل اتجاه الصفحة حسب اللغة.
+* [ ] Add Meshopt post-process if needed; consider KTX2 if textures appear.
 
-**المرحلة C — 3D Pipeline**
+**B) Viewer Implementation**
 
-* [ ] سكربتات: STEP→OBJ (FreeCAD) وOBJ→GLB (obj2gltf/Blender) + ضغط Draco/Meshopt + KTX2.
-* [ ] Action: عند push لأي `.stp` شغّل التحويل وادفع `.glb` إلى `public/models/`.
+* [ ] Install: `npm i react react-dom three @react-three/fiber @react-three/drei detect-gpu`
+* [ ] `ProductViewer.tsx`: load GLB via `GLTFLoader` + `DRACOLoader`/Meshopt, scene lights, shadows, orbit.
+* [ ] `ViewerHud.tsx`: Wireframe/Auto-Rotate/Reset/Download + event hooks (`analytics.ts`).
+* [ ] Persist camera target/position in `localStorage`.
+* [ ] Very light background (#F7F8FA) for the hero container.
 
-**المرحلة D — الواجهة والتجربة**
+**C) Homepage Wiring**
 
-* [ ] مكوّن `<ProductViewer3D>` (r3f/drei): كاميرا، إضاءة، أرضية، أدوات (wireframe/autorotate/reset/download).
-* [ ] خلفية فاتحة جدًا (`#F7F8FA`) وتدرجات لطيفة للعناصر.
-* [ ] Sections للصفحة الرئيسية: Hero (لقطة 3D)، Value, Specs Highlights, Gallery, CTA.
+* [ ] Replace parallax container in `index.html` with a `<div id="viewer-root">`.
+* [ ] Hydrate React entry (`main.tsx`) only when GPU tier is medium+; otherwise render fallback.
+* [ ] Remove parallax: delete code at `index.html:43`, `app.js:3`.
+* [ ] Remove/ignore `docs/factory.js` in production bundle.
 
-**المرحلة E — المحتوى والتسويق**
+**D) Fallback**
 
-* [ ] نصوص عربية/إنجليزية مركّزة للمبيعات (H1/H2/CTA).
-* [ ] نماذج Leads (Email/Phone/Company) + خيار **WhatsApp CTA** مع UTM.
-* [ ] Schema.org Product + OG Images.
+* [ ] If `detect-gpu` tier = 0/1 or WebGL not available → show 360° sprite (or static poster) + CTA “Open 3D viewer (beta)”.
+* [ ] Provide a dedicated `/viewer` page with full-screen R3F for users who opt in.
 
-**المرحلة F — الأداء & A11y**
+**E) Analytics**
 
-* [ ] Mesh decimation إذا احتجنا، وتقسيم المشهد إن كان كبيرًا.
-* [ ] lazy hydration للمكونات الثقيلة (3D فقط عند التفاعل إن لزم).
-* [ ] اختبارات A11y (axe) ودعم الكيبورد.
+* [ ] GA4 custom events:
 
-**المرحلة G — الإطلاق**
+  * `viewer_open`, `viewer_rotate`, `viewer_wireframe_toggle`, `viewer_reset`, `viewer_download_glb`, `cta_whatsapp_click`.
+* [ ] Verify events in GA4 debug view.
 
-* [ ] تحقق Lighthouse CI في الـ PR.
-* [ ] نشر إلى GitHub Pages أو Vercel، وتفعيل المراقبة (Web Vitals/GA4).
+**F) Performance & QA**
+
+* [ ] Lighthouse (mobile) run in CI; meet budgets.
+* [ ] Test latest Chrome/Edge/Safari + iOS/Android.
+* [ ] Accessibility: keyboard focus, aria-labels for UI.
+
+**G) CI/CD**
+
+* [ ] `convert-and-deploy.yml`: if `.stp` exists → convert → compress → publish `/public`.
+* [ ] Keep Pages deployment green.
 
 ---
 
-### 4) المواصفات التفصيلية (مختصرة)
+### Branch & PR Plan
 
-* **Theme (Light):**
+* Create `feat/3d-viewer-ufo5-200W`.
+* Open small PRs:
 
-  * `--bg: #F7F8FA`, `--surface: #FFFFFF`, `--text: #111`, `--muted: #6B7280`, `--primary: #2563EB`, `--accent: #0EA5E9`.
-  * خط عربي واضح (مثلاً IBM Plex Sans Arabic أو Cairo)، إنجليزي Inter/Manrope.
-* **3D:**
+  1. `chore/pipeline-3d` (tools + workflow)
+  2. `feat/viewer-core` (R3F component + loaders)
+  3. `feat/homepage-integration` (replace parallax + fallback)
+  4. `feat/analytics-a11y` (events + a11y fixes)
 
-  * GLB واحد مضغوط Draco، استخدم `GLTFLoader` مع `DRACOLoader` + `MeshoptDecoder`.
-  * Exposure/aoLight بيئي لطيف، HDRI اختيارية خفيفة.
-  * قياس تلقائي وتوسيط النموذج، وحفظ آخر وضع كاميرا في `localStorage`.
-* **SEO:**
-
-  * عناوين فريدة، meta desc، canonical، OG/Twitter.
-  * `sitemap.xml` و`robots.txt`.
-  * `schema.org/Product` مع السعر/الفولت/القدرة إن توفرت.
-* **Analytics:**
-
-  * GA4 + مقاييس أحداث: `cta_click`, `whatsapp_click`, `glb_download`, `viewer_interaction`.
-  * Meta Pixel (PageView + ViewContent + Lead).
-* **التطوير:**
-
-  * ESM فقط، no jQuery.
-  * ESLint strict, Prettier, Husky pre-commit (lint-staged).
-  * Branches: `feat/*`, `fix/*`, `chore/*`. Conventional Commits.
-* **القابلية الدولية:**
-
-  * `lang="ar"` و`dir="rtl"` للواجهة العربية. تبديل لغوي في الهيدر.
+* Each PR must show: short demo GIF + Lighthouse before/after + GLB size.
 
 ---
 
-### 5) معايير القبول (Acceptance Criteria)
+### Risks & Mitigations
 
-* [ ] هوم/منتج/عارض/تواصل تعمل بالعربية والإنجليزية.
-* [ ] العارض 3D سريع وسلس على موبايل حديث (60fps تقريبًا) مع fallback.
-* [ ] Lighthouse (Mobile) ≥ 95 لجميع المؤشرات.
-* [ ] Forms + WhatsApp CTA تسجّل أحداث التحويل في GA4.
-* [ ] السيو مُفعّل + schema.org ظاهر في Rich Results Test.
-* [ ] CI/CD: بناء تلقائي + تحويل STEP→GLB + نشر ناجح.
+* **Large mesh size** → decimate/cleanup in Blender and increase Draco quantization.
+* **Mobile perf** → cap polycount, turn off shadows on low tier, reduce HDRI.
+* **WebGL blocked devices** → robust fallback.
 
 ---
 
-### 6) ملاحظات التنفيذ السريعة
+### Done = Merge + Deploy
 
-* اعتمد المنتج الافتراضي **ufo5-200W**؛ أنشئ `data/products.json` لباقي القدرات (50–240W) واستخدمه في مولّد صفحات ديناميكي.
-* اجعل الخلفية فاتحة جدًا في كامل الموقع، ووفّر **تباينًا كافيًا** للنصوص.
-* وفّر زر **تحميل GLB**، واستبدله بتحميل **PDF** للداتا شيت إن وُجد.
-* لا تُحمّل الـ 3D فورًا في الهوم على الأجهزة الضعيفة: استخدم **Poster** مع زر "عرض 3D".
+We consider this issue complete when the homepage shows the interactive 3D luminaire (not parallax), analytics fire, budgets pass, and Pages deployment is live.
 
 ---
 
-### 7) تسليم نهائي
+## توضيح بالعربي (مختصر)
 
-* رابط Demo (Pages/Vercel) + تقرير Lighthouse.
-* مستند قصير يشرح قرارات التصميم/التنفيذ، ونقاط التحسين اللاحقة.
-* خطة محتوى لحملات Ads (عناوين/CTA/UTM) و3 شرائح صور/فيديو قصيرة جاهزة للاستخدام.
-
-> **ابدأ الآن** بالمرحلة A (Audit) وافتح PRات صغيرة لكل خطوة. أي أسئلة تصميمية/تسويقية رئيسية وثّقها في هذا الـ Issue قبل اعتمادها.
+هذا الطلب يخلّي **أنيس** يوقف الـ parallax الحالي، ويحوّل **ufo5‑200W.stp** إلى **GLB** مضغوط، ويبني **عارض 3D** حقيقي (React Three Fiber)، ويشبكه بالصفحة الرئيسية بخلفية فاتحة، مع بدائل للأجهزة الضعيفة وتتبع تحليلات وأداء قوي. وفيه معايير قبول واضحة عشان نقفل المهمة بثقة.
