@@ -1,0 +1,12 @@
+{
+  "name": "cad-web-viewer-ufo5-200W",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "http-server public -p 8080 -c-1",
+    "prepare:models": "echo \"Use FreeCAD/Blender or obj2gltf to create public/models/ufo5-200W.glb\""
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CAD 3D Viewer</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    html,body{height:100%;margin:0}
+    #canvas{width:100%;height:100%;display:block}
+    #ui {position: absolute; top: 12px; left: 12px; z-index: 10; background: rgba(255,255,255,0.92); padding:8px; border-radius:6px; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15);}
+    button,input,select{margin:4px}
+    .hint{font-size:12px;color:#666}
+  </style>
+</head>
+<body>
+  <div id="ui">
+    <label>Model:
+      <select id="modelSelect">
+        <option value="models/ufo5-200W.glb">ufo5-200W.glb</option>
+      </select>
+    </label>
+    <br/>
+    <button id="toggleWire">Wireframe</button>
+    <button id="toggleAuto">Auto-rotate</button>
+    <a id="download" href="#" download>Download glb</a>
+    <div class="hint">Place your .glb in <code>public/models/</code> if the default is missing.</div>
+  </div>
+
+  <canvas id="canvas"></canvas>
+
+  <script type="module" src="./src/viewer.js"></script>
+</body>
+</html>
