@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Immersive multi-layer 3D presentation for the alroufLED street light collection."
+      content="Lightweight 3D experience for the alroufLED ufo5-200W street luminaire with interactive product insights."
     />
-    <title>alroufLED Street Light Experience</title>
+    <title>alroufLED — ufo5-200W Interactive 3D</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preload" href="sprites/290W-1.png" as="image" />
+    <link rel="preload" href="sprites/50-240W-7.png" as="image" />
     <link
       rel="preload"
-      as="image"
-      href="290W%20(1).png"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="50-240W%20(7).png"
+      href="models/ufo5-200W.glb"
+      as="fetch"
+      type="model/gltf-binary"
+      crossorigin="anonymous"
     />
   </head>
   <body>
@@ -28,52 +27,56 @@
           <span class="brand-name">alroufLED</span>
         </div>
         <nav class="top-nav__links">
-          <a href="#vision">Vision</a>
-          <a href="#layers">Layers</a>
-          <a href="#engineering">Engineering</a>
-          <a href="#cta">Contact</a>
+          <a href="#vision" data-scroll-to="#vision">Overview</a>
+          <a href="#layers" data-scroll-to="#layers">Layers</a>
+          <a href="#engineering" data-scroll-to="#engineering">Engineering</a>
+          <a href="#cta" data-scroll-to="#cta">Contact</a>
         </nav>
       </header>
 
       <main>
         <section class="hero" id="vision">
           <div class="hero__content" data-reveal>
-            <p class="eyebrow">Flagship Street Illumination</p>
+            <p class="eyebrow">ufo5-200W Flagship</p>
             <h1>
-              Street lighting,
-              <span class="accent">reimagined in 3D.</span>
+              A light, bright
+              <span class="accent">3D product journey.</span>
             </h1>
             <p>
-              Meet the next generation alroufLED street light—engineered for
-              precision, efficiency, and architectural presence. Glide through
-              multi-layer visuals that highlight the craft behind every lumen.
+              Explore every cooling fin, optic, and module of the alroufLED ufo5 series
+              in an interactive viewer tuned for performance, accessibility, and
+              marketing analytics.
             </p>
             <div class="cta-group">
-              <a class="cta-primary" href="#layers">Explore Layers</a>
-              <button class="cta-secondary" type="button" data-scroll-to="#engineering">
-                See Engineering
+              <a class="cta-primary" href="viewer.html">Open full viewer</a>
+              <button
+                class="cta-secondary"
+                type="button"
+                data-scroll-to="#engineering"
+              >
+                See engineering
               </button>
             </div>
+            <dl class="hero__highlights">
+              <div>
+                <dt>LCP</dt>
+                <dd>&lt; 2.5s on mobile</dd>
+              </div>
+              <div>
+                <dt>Variants</dt>
+                <dd>50–240W family</dd>
+              </div>
+              <div>
+                <dt>Analytics</dt>
+                <dd>GA4 event hooks</dd>
+              </div>
+            </dl>
           </div>
-
           <div class="hero__visual" data-reveal>
-            <div class="hero__backdrop"></div>
-            <div class="hero__stage" data-parallax>
-              <div class="stage-layer layer-glow" data-depth="0.08"></div>
-              <img
-                class="stage-layer layer-main"
-                data-depth="0.22"
-                src="290W%20(1).png"
-                alt="alroufLED flagship street light"
-              />
-              <img
-                class="stage-layer layer-lightfield"
-                data-depth="0.32"
-                src="50-240W%20(5).png"
-                alt="Light diffusion pattern"
-              />
-              <div class="stage-layer layer-shadow" data-depth="-0.12" aria-hidden="true"></div>
+            <div id="viewer-root" class="viewer-root" aria-live="polite">
+              <noscript>Enable JavaScript to load the interactive 3D viewer.</noscript>
             </div>
+            <p class="viewer-caption">Interactive ufo5-200W model with Draco + Meshopt compression.</p>
           </div>
         </section>
 
@@ -82,55 +85,53 @@
             <article class="story-card" data-reveal>
               <h2>Layer 01 — Optics</h2>
               <p>
-                Sculpted reflector geometry channels every photon with intent.
-                The smooth anodized housing minimizes glare while directing
-                light precisely onto the carriageway.
+                Custom reflector geometry channels each lumen precisely, balancing roadway
+                safety with architectural presence.
               </p>
             </article>
             <article class="story-card" data-reveal>
               <h2>Layer 02 — Thermal Core</h2>
               <p>
-                A finely finned heat-sink dissipates warmth in three axes,
-                enabling higher lumen density without compromise to lifespan.
+                Finned magnesium alloy sinks dissipate heat in three axes so output stays
+                high even in Gulf summers.
               </p>
             </article>
             <article class="story-card" data-reveal>
               <h2>Layer 03 — Intelligence</h2>
               <p>
-                Adaptive drivers listen to citywide networks, modulating output
-                in response to evolving urban rhythms and ambient light.
+                Smart drivers integrate DALI 2, PLC, and LTE for adaptive lighting that
+                listens to citywide control rooms.
               </p>
             </article>
           </div>
         </section>
 
-        <section class="layered-gallery">
-          <div class="gallery-stage" data-parallax>
+        <section class="layered-gallery" aria-labelledby="gallery-label">
+          <div class="gallery-stage">
             <img
-              class="gallery-layer gallery-base"
-              data-depth="0.12"
-              src="50-240W%20(7).png"
+              class="gallery-layer"
+              src="sprites/50-240W-7.png"
               alt="alroufLED modular street light 240W variant"
+              loading="lazy"
             />
             <img
-              class="gallery-layer gallery-overlay"
-              data-depth="0.24"
-              src="50-240W%20(8).png"
-              alt="alroufLED exploded module detail"
+              class="gallery-layer"
+              src="sprites/50-240W-8.png"
+              alt="Exploded module detail"
+              loading="lazy"
             />
             <img
-              class="gallery-layer gallery-highlight"
-              data-depth="0.34"
-              src="50-240W%20(6).png"
-              alt="alroufLED control module detail"
+              class="gallery-layer"
+              src="sprites/50-240W-6.png"
+              alt="Control module detail"
+              loading="lazy"
             />
           </div>
           <div class="gallery-copy" data-reveal>
-            <h2>Immersive 3D storytelling</h2>
+            <h2 id="gallery-label">Immersive storytelling</h2>
             <p>
-              Slide between perspectives as layered imagery responds to movement,
-              revealing how each component integrates into a cohesive lighting
-              system with Apple-grade polish.
+              Layered imagery and 3D motion blend into a single narrative. Hover and swipe
+              to reveal the mechanical choreography behind the product.
             </p>
           </div>
         </section>
@@ -140,31 +141,27 @@
             <h2>Precision-engineered backbone</h2>
             <ul>
               <li>
-                <strong>Monolith chassis</strong> CNC-machined aluminum body with
-                seamless powder coating for coastal resilience.
+                <strong>Monolith chassis</strong> — CNC-machined aluminum body with a marine
+                grade powder coat.
               </li>
               <li>
-                <strong>Adaptive lumen logic</strong> Smart sensors regulate
-                brightness while maintaining a consistent color temperature curve.
+                <strong>Adaptive lumen logic</strong> — Smart sensors tune output while
+                keeping CCT rock steady.
               </li>
               <li>
-                <strong>Service-first approach</strong> Magnetic access door and
-                tool-free driver swaps keep downtime to a minimum.
+                <strong>Service-first approach</strong> — Tool-free driver swaps and magnetic
+                access points.
               </li>
             </ul>
           </div>
           <div class="engineering__visual" data-reveal>
-            <div class="engineering-card" data-tilt>
-              <div class="card-backdrop"></div>
-              <img
-                src="50-240W%20(5).png"
-                alt="alroufLED street light fins"
-              />
+            <div class="engineering-card">
+              <img src="sprites/50-240W-5.png" alt="Cooling fins detail" loading="lazy" />
               <div class="card-copy">
                 <h3>Heat dispersion mastered</h3>
                 <p>
-                  Fanned architecture elevates cooling surface area by 28%,
-                  sustaining peak output in demanding climates.
+                  The fin geometry expands radiating surface area by 28%, preserving lumen
+                  density for 120,000+ hours.
                 </p>
               </div>
             </div>
@@ -182,7 +179,7 @@
           </div>
           <div class="metric">
             <p class="metric-label">Operating range</p>
-            <p class="metric-value">-45°C to 55°C</p>
+            <p class="metric-value">-45°C → 55°C</p>
           </div>
           <div class="metric">
             <p class="metric-label">Projected life</p>
@@ -195,21 +192,30 @@
         <div class="cta__panel" data-reveal>
           <h2>Ready to light the street of the future?</h2>
           <p>
-            Assemble a custom configuration with our lighting design studio.
-            Swap optics, map photometrics, and visualize installations in AR.
+            Assemble a bespoke configuration with our lighting design studio. Swap optics,
+            simulate photometrics, and deploy faster with AR visualisations.
           </p>
           <div class="cta__actions">
-            <a class="cta-primary" href="mailto:design@alroufled.com">Book a session</a>
-            <a class="cta-secondary" href="#vision">Replay presentation</a>
+            <a
+              class="cta-primary"
+              href="https://wa.me/966000000000"
+              target="_blank"
+              rel="noreferrer"
+              data-analytics-event="cta_whatsapp_click"
+            >
+              WhatsApp our team
+            </a>
+            <a class="cta-secondary" href="mailto:design@alroufled.com">Book a session</a>
           </div>
         </div>
       </section>
 
       <footer class="site-footer">
-        <p>© <span data-year></span> alroufLED. Crafted for night and narrative.</p>
+        <p>© <span data-year></span> alroufLED. Designed for night and narrative.</p>
       </footer>
     </div>
 
-    <script src="app.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/site.ts"></script>
   </body>
 </html>

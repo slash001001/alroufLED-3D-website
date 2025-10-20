@@ -1,0 +1,44 @@
+{
+  "name": "alroufled-3d-website",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "model:step": "freecadcmd tools/convert_step_to_obj.py assets/ufo5-200W.stp public/models/ufo5-200W.obj",
+    "model:glb": "npx obj2gltf -i public/models/ufo5-200W.obj -o public/models/ufo5-200W.glb --binary",
+    "model:compress": "node tools/postprocess-glb.mjs public/models/ufo5-200W.glb",
+    "model:clean": "node -e \"const fs=require('fs');try{fs.unlinkSync('public/models/ufo5-200W.obj');}catch(_){}\"",
+    "model:build": "npm run model:step && npm run model:glb && npm run model:compress && npm run model:clean"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.93.0",
+    "@react-three/fiber": "^8.15.16",
+    "detect-gpu": "^5.0.31",
+    "meshoptimizer": "^0.20.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.159.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.2",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.35.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "gltf-pipeline": "^4.3.0",
+    "obj2gltf": "^3.1.6",
+    "prettier": "^3.3.3",
+    "typescript": "^5.4.5",
+    "three-stdlib": "^2.21.11",
+    "vite": "^5.2.10"
+  }
+}

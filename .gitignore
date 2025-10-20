@@ -1,0 +1,23 @@
+# Node / tooling
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# macOS
+.DS_Store
+
+# Env
+.env
+.env.*
+
+# Generated assets
+public/models/*.obj
+public/models/*.dae
+public/models/*.usdz

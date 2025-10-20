@@ -1,0 +1,194 @@
+.viewer-shell {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  background: linear-gradient(180deg, #f7f8fa 0%, #ffffff 100%);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px -40px rgba(15, 23, 42, 0.25);
+}
+
+.viewer-canvas {
+  width: 100%;
+  height: clamp(420px, 60vh, 640px);
+}
+
+.viewer-hud {
+  position: absolute;
+  inset: auto 24px 24px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 32px -24px rgba(15, 23, 42, 0.35);
+}
+
+.viewer-hud button,
+.viewer-hud .viewer-download {
+  border: 1px solid rgba(71, 85, 105, 0.2);
+  background: rgba(248, 250, 252, 0.85);
+  color: #111827;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.viewer-hud button.is-active,
+.viewer-hud .viewer-download:hover,
+.viewer-hud button:hover {
+  background: #2563eb;
+  color: #f8fafc;
+  border-color: transparent;
+  transform: translateY(-1px);
+}
+
+.viewer-hud .viewer-download {
+  text-decoration: none;
+}
+
+.viewer-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(247, 248, 250, 0.92);
+  color: #1f2937;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.viewer-loading.viewer-loading--error {
+  padding: 24px;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.fallback-hero {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  padding: 24px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.fallback-hero__sprite {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 22px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #f1f5f9, #e2e8f0);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.fallback-hero__sprite img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.fallback-hero__placeholder {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(148, 163, 184, 0.2) 0,
+    rgba(148, 163, 184, 0.2) 12px,
+    rgba(255, 255, 255, 0.5) 12px,
+    rgba(255, 255, 255, 0.5) 24px
+  );
+}
+
+.fallback-hero__hint {
+  position: absolute;
+  inset: auto 16px 16px 16px;
+  background: rgba(15, 23, 42, 0.64);
+  color: #f8fafc;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.fallback-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.fallback-hero__actions button {
+  background: #2563eb;
+  color: #f8fafc;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 18px 40px -24px rgba(37, 99, 235, 0.7);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fallback-hero__actions button:nth-of-type(2) {
+  background: #0ea5e9;
+  box-shadow: 0 18px 40px -24px rgba(14, 165, 233, 0.65);
+}
+
+.fallback-hero__actions button:hover {
+  transform: translateY(-1px);
+}
+
+.viewer-page {
+  min-height: 100vh;
+  padding: clamp(24px, 5vw, 64px);
+  display: grid;
+  gap: clamp(24px, 4vw, 48px);
+  background: radial-gradient(circle at top, #f0f4ff, transparent 70%), #f7f8fa;
+}
+
+.viewer-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #1f2937;
+}
+
+.viewer-page__header a {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.viewer-page__header h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .viewer-shell {
+    border-radius: 22px;
+  }
+
+  .viewer-hud {
+    inset: auto 16px 16px 16px;
+  }
+
+  .viewer-canvas {
+    height: clamp(360px, 50vh, 520px);
+  }
+}
