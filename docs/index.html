@@ -1,579 +1,220 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="LeenAI 3D Ai-Factory experience — layered presentation of the statement of work."
+      content="Lightweight 3D experience for the alroufLED ufo5-200W street luminaire with interactive product insights."
     />
-    <title>LeenAI 3D Ai-Factory</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>alroufLED — ufo5-200W Interactive 3D</title>
+    <link rel="preload" href="sprites/290W-1.png" as="image" />
+    <link rel="preload" href="sprites/50-240W-7.png" as="image" />
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="preload"
+      href="models/ufo5-200W.glb"
+      as="fetch"
+      type="model/gltf-binary"
+      crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css" />
+    <script type="module" crossorigin src="./assets/index-B7lzBTtR.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BInKUEGz.css">
   </head>
   <body>
-    <canvas id="factory3D" aria-hidden="true"></canvas>
-
-    <div class="ui">
-      <header class="site-header">
+    <div class="app-shell">
+      <header class="top-nav" data-reveal>
         <div class="brand">
-          <div class="brand-icon" aria-hidden="true"></div>
-          <div>
-            <span
-              class="brand-name"
-              data-en="LeenAI Ai-Factory"
-              data-ar="مصنع لين للذكاء الاصطناعي"
-              >LeenAI Ai-Factory</span
-            >
-            <span
-              class="brand-sub"
-              data-en="Statement of Work Preview"
-              data-ar="استعراض نطاق العمل"
-              >Statement of Work Preview</span
-            >
-          </div>
+          <span class="brand-mark"></span>
+          <span class="brand-name">alroufLED</span>
         </div>
-        <div class="header-actions">
-          <button
-            class="chip"
-            type="button"
-            id="themeToggle"
-            aria-pressed="false"
-            data-en="Theme"
-            data-ar="السمة"
-          >
-            Theme
-          </button>
-          <button
-            class="chip"
-            type="button"
-            id="langToggle"
-            aria-pressed="false"
-            data-en="العربية"
-            data-ar="English"
-          >
-            العربية
-          </button>
-          <span class="header-chip orbit" aria-hidden="true"></span>
-        </div>
+        <nav class="top-nav__links">
+          <a href="#vision" data-scroll-to="#vision">Overview</a>
+          <a href="#layers" data-scroll-to="#layers">Layers</a>
+          <a href="#engineering" data-scroll-to="#engineering">Engineering</a>
+          <a href="#cta" data-scroll-to="#cta">Contact</a>
+        </nav>
       </header>
 
       <main>
-        <section class="section section-hero" id="hero">
-          <div class="section-header">
-            <p
-              class="eyebrow"
-              data-en="Lite-Pro Experience"
-              data-ar="تجربة لايت برو"
-            >
-              Lite-Pro Experience
-            </p>
-            <h1
-              class="u-wave"
-              data-en="Build the LeenAI Ai-Factory with layered clarity."
-              data-ar="ابنِ مصنع لين للذكاء الاصطناعي بطبقات واضحة ومتداخلة."
-            >
-              Build the LeenAI Ai-Factory with layered clarity.
+        <section class="hero" id="vision">
+          <div class="hero__content" data-reveal>
+            <p class="eyebrow">ufo5-200W Flagship</p>
+            <h1>
+              A light, bright
+              <span class="accent">3D product journey.</span>
             </h1>
-            <p
-              data-en="[TBD]"
-              data-ar="[TBD]"
-            >
-              [TBD]
+            <p>
+              Explore every cooling fin, optic, and module of the alroufLED ufo5 series
+              in an interactive viewer tuned for performance, accessibility, and
+              marketing analytics.
             </p>
-          </div>
-          <div class="hero-ctas">
-            <a
-              class="btn primary"
-              href="#cta"
-              data-en="Book Discovery Call"
-              data-ar="احجز مكالمة استكشافية"
-            >
-              Book Discovery Call
-            </a>
-            <button
-              class="btn ghost"
-              type="button"
-              data-scroll-target="#layers"
-              data-en="Tour the Layers"
-              data-ar="تعرّف على الطبقات"
-            >
-              Tour the Layers
-            </button>
-          </div>
-        </section>
-
-        <section class="section" id="vision">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="Vision"
-              data-ar="الرؤية"
-            >
-              Vision
-            </h2>
-            <p
-              data-en="[TBD]"
-              data-ar="[TBD]"
-            >
-              [TBD]
-            </p>
-          </header>
-        </section>
-
-        <section class="section section-layers" id="layers">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="Ai-Factory Stack"
-              data-ar="طبقات مصنع الذكاء الاصطناعي"
-            >
-              Ai-Factory Stack
-            </h2>
-            <p
-              data-en="Seven integrated stages move data into safe, intelligent responses."
-              data-ar="سبع مراحل مترابطة تنقل البيانات إلى ردود ذكية وآمنة."
-            >
-              Seven integrated stages move data into safe, intelligent responses.
-            </p>
-          </header>
-          <ol class="layers-map">
-            <li data-key="ingestion">
-              <span
-                data-en="Data Ingestion"
-                data-ar="التقاط البيانات"
-                >Data Ingestion</span
+            <div class="cta-group">
+              <a class="cta-primary" href="viewer.html">Open full viewer</a>
+              <button
+                class="cta-secondary"
+                type="button"
+                data-scroll-to="#engineering"
               >
-            </li>
-            <li data-key="qa">
-              <span
-                data-en="Cleaning &amp; QA"
-                data-ar="تنظيف وضمان الجودة"
-                >Cleaning &amp; QA</span
-              >
-            </li>
-            <li data-key="index">
-              <span
-                data-en="Knowledge Index"
-                data-ar="فهرس المعرفة"
-                >Knowledge Index</span
-              >
-            </li>
-            <li data-key="pdpl">
-              <span
-                data-en="PDPL Guardrails"
-                data-ar="حواجز حماية PDPL"
-                >PDPL Guardrails</span
-              >
-            </li>
-            <li data-key="reasoning">
-              <span
-                data-en="Reasoning &amp; Tools"
-                data-ar="الاستدلال والأدوات"
-                >Reasoning &amp; Tools</span
-              >
-            </li>
-            <li data-key="channels">
-              <span
-                data-en="Channels &amp; Integrations"
-                data-ar="القنوات والتكاملات"
-                >Channels &amp; Integrations</span
-              >
-            </li>
-            <li data-key="monitoring">
-              <span
-                data-en="Monitoring &amp; Metrics"
-                data-ar="المراقبة والقياسات"
-                >Monitoring &amp; Metrics</span
-              >
-            </li>
-          </ol>
-          <div class="fallback-stack" data-fallback-stack aria-hidden="true">
-            <div class="stack-layer" data-key="ingestion">Data Ingestion</div>
-            <div class="stack-layer" data-key="qa">Cleaning &amp; QA</div>
-            <div class="stack-layer" data-key="index">Knowledge Index</div>
-            <div class="stack-layer" data-key="pdpl">PDPL Guardrails</div>
-            <div class="stack-layer" data-key="reasoning">Reasoning &amp; Tools</div>
-            <div class="stack-layer" data-key="channels">Channels &amp; Integrations</div>
-            <div class="stack-layer" data-key="monitoring">Monitoring &amp; Metrics</div>
-          </div>
-        </section>
-
-        <section class="section section-kpis" id="kpis">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="Projected KPIs"
-              data-ar="المؤشرات الرئيسية المتوقعة"
-            >
-              Projected KPIs
-            </h2>
-          </header>
-          <div class="grid kpi-grid">
-            <article class="card kpi-card">
-              <span
-                class="kpi-label"
-                data-en="Faster Responses"
-                data-ar="استجابات أسرع"
-                >Faster Responses</span
-              >
-              <span class="kpi-value" data-suffix="%" data-target="42">0%</span>
-            </article>
-            <article class="card kpi-card">
-              <span
-                class="kpi-label"
-                data-en="Fewer Errors"
-                data-ar="أخطاء أقل"
-                >Fewer Errors</span
-              >
-              <span class="kpi-value" data-suffix="%" data-target="38">0%</span>
-            </article>
-            <article class="card kpi-card">
-              <span
-                class="kpi-label"
-                data-en="Uptime"
-                data-ar="مدة التوفر"
-                >Uptime</span
-              >
-              <span class="kpi-value" data-suffix="%" data-target="99.5">0%</span>
-            </article>
-            <article class="card kpi-card">
-              <span
-                class="kpi-label"
-                data-en="Avg. Latency"
-                data-ar="متوسط التأخير"
-                >Avg. Latency</span
-              >
-              <span class="kpi-value" data-suffix="s" data-target="1.2">0s</span>
-            </article>
-          </div>
-        </section>
-
-        <section class="section section-timeline" id="timeline">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="Pilot Timeline"
-              data-ar="الجدول الزمني للتجربة"
-            >
-              Pilot Timeline
-            </h2>
-            <p
-              data-en="Four sprints shape the Ai-Factory pilot."
-              data-ar="أربعة أسابيع مرنة تشكل تجربة المصنع."
-            >
-              Four sprints shape the Ai-Factory pilot.
-            </p>
-          </header>
-          <ol class="timeline">
-            <li>
-              <span data-en="Discover" data-ar="الاكتشاف">Discover</span>
-              <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-            </li>
-            <li>
-              <span data-en="Build" data-ar="البناء">Build</span>
-              <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-            </li>
-            <li>
-              <span data-en="Integrate" data-ar="الدمج">Integrate</span>
-              <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-            </li>
-            <li>
-              <span data-en="Measure" data-ar="القياس">Measure</span>
-              <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-            </li>
-          </ol>
-        </section>
-
-        <section class="section section-services" id="services">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="Services"
-              data-ar="الخدمات"
-            >
-              Services
-            </h2>
-          </header>
-          <div class="grid card-grid">
-            <article class="card">
-              <h3
-                data-en="Design &amp; Prototype"
-                data-ar="التصميم والنمذجة"
-              >
-                Design &amp; Prototype
-              </h3>
-              <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-            </article>
-            <article class="card">
-              <h3
-                data-en="Knowledge Engineering"
-                data-ar="هندسة المعرفة"
-              >
-                Knowledge Engineering
-              </h3>
-              <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-            </article>
-            <article class="card">
-              <h3
-                data-en="PDPL &amp; Security"
-                data-ar="الامتثال والأمن"
-              >
-                PDPL &amp; Security
-              </h3>
-              <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-            </article>
-            <article class="card">
-              <h3
-                data-en="Ops &amp; Monitoring"
-                data-ar="التشغيل والمراقبة"
-              >
-                Ops &amp; Monitoring
-              </h3>
-              <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="section section-methodology" id="methodology">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="Methodology"
-              data-ar="المنهجية"
-            >
-              Methodology
-            </h2>
-          </header>
-          <ul class="list">
-            <li data-en="[TBD]" data-ar="[TBD]">[TBD]</li>
-            <li data-en="[TBD]" data-ar="[TBD]">[TBD]</li>
-            <li data-en="[TBD]" data-ar="[TBD]">[TBD]</li>
-          </ul>
-        </section>
-
-        <section class="section section-pdpl" id="pdpl">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="PDPL Security Checklist"
-              data-ar="قائمة أمن PDPL"
-            >
-              PDPL Security Checklist
-            </h2>
-          </header>
-          <ul class="checklist">
-            <li data-en="✓ Data minimisation enforced" data-ar="✓ تطبيق تقليل البيانات">
-              ✓ Data minimisation enforced
-            </li>
-            <li data-en="✓ Consent and audit trail" data-ar="✓ موافقة وسجل تدقيق">
-              ✓ Consent and audit trail
-            </li>
-            <li data-en="✓ Role-based access controls" data-ar="✓ صلاحيات وصول حسب الدور">
-              ✓ Role-based access controls
-            </li>
-            <li data-en="✓ Automated redaction pipeline" data-ar="✓ خط معالجة للإخفاء الآلي">
-              ✓ Automated redaction pipeline
-            </li>
-          </ul>
-        </section>
-
-        <section class="section section-integrations" id="integrations">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="Integrations"
-              data-ar="التكاملات"
-            >
-              Integrations
-            </h2>
-            <p
-              data-en="[TBD]"
-              data-ar="[TBD]"
-            >
-              [TBD]
-            </p>
-          </header>
-          <div class="integration-row">
-            <span class="integration-icon" aria-hidden="true">CRM</span>
-            <span class="integration-icon" aria-hidden="true">ERP</span>
-            <span class="integration-icon" aria-hidden="true">IVR</span>
-            <span class="integration-icon" aria-hidden="true">API</span>
-            <span class="integration-icon" aria-hidden="true">BI</span>
-          </div>
-        </section>
-
-        <section class="section section-pricing" id="pricing">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="Pricing Options"
-              data-ar="خيارات التسعير"
-            >
-              Pricing Options
-            </h2>
-          </header>
-          <div class="pricing-grid">
-            <article class="flip-card" tabindex="0">
-              <div class="flip-inner">
-                <div class="flip-face front">
-                  <h3 data-en="Mini Pilot" data-ar="تجربة مصغرة">Mini Pilot</h3>
-                  <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-                </div>
-                <div class="flip-face back">
-                  <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-                </div>
-              </div>
-            </article>
-            <article class="flip-card" tabindex="0">
-              <div class="flip-inner">
-                <div class="flip-face front">
-                  <h3 data-en="Full Pilot" data-ar="تجربة كاملة">Full Pilot</h3>
-                  <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-                </div>
-                <div class="flip-face back">
-                  <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-                </div>
-              </div>
-            </article>
-            <article class="flip-card" tabindex="0">
-              <div class="flip-inner">
-                <div class="flip-face front">
-                  <h3 data-en="Enterprise" data-ar="مؤسسي">Enterprise</h3>
-                  <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-                </div>
-                <div class="flip-face back">
-                  <p data-en="[TBD]" data-ar="[TBD]">[TBD]</p>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section class="section section-scope" id="scope">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="Scope &amp; Acceptance"
-              data-ar="النطاق والقبول"
-            >
-              Scope &amp; Acceptance
-            </h2>
-          </header>
-          <div class="scope-chips">
-            <span class="chip" data-en="[TBD]" data-ar="[TBD]">[TBD]</span>
-            <span class="chip" data-en="[TBD]" data-ar="[TBD]">[TBD]</span>
-            <span class="chip" data-en="[TBD]" data-ar="[TBD]">[TBD]</span>
-          </div>
-          <div class="progress-bars">
-            <div class="progress-bar" style="--v: 0.4">
-              <span data-en="Data readiness" data-ar="جاهزية البيانات"
-                >Data readiness</span
-              >
+                See engineering
+              </button>
             </div>
-            <div class="progress-bar" style="--v: 0.6">
-              <span data-en="Integration depth" data-ar="عمق التكامل"
-                >Integration depth</span
-              >
+            <dl class="hero__highlights">
+              <div>
+                <dt>LCP</dt>
+                <dd>&lt; 2.5s on mobile</dd>
+              </div>
+              <div>
+                <dt>Variants</dt>
+                <dd>50–240W family</dd>
+              </div>
+              <div>
+                <dt>Analytics</dt>
+                <dd>GA4 event hooks</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="hero__visual" data-reveal>
+            <div id="viewer-root" class="viewer-root" aria-live="polite">
+              <noscript>Enable JavaScript to load the interactive 3D viewer.</noscript>
             </div>
-            <div class="progress-bar" style="--v: 0.8">
-              <span data-en="PDPL compliance" data-ar="الامتثال لـPDPL"
-                >PDPL compliance</span
-              >
+            <p class="viewer-caption">Interactive ufo5-200W model with Draco + Meshopt compression.</p>
+          </div>
+        </section>
+
+        <section class="storyline" id="layers">
+          <div class="storyline__grid">
+            <article class="story-card" data-reveal>
+              <h2>Layer 01 — Optics</h2>
+              <p>
+                Custom reflector geometry channels each lumen precisely, balancing roadway
+                safety with architectural presence.
+              </p>
+            </article>
+            <article class="story-card" data-reveal>
+              <h2>Layer 02 — Thermal Core</h2>
+              <p>
+                Finned magnesium alloy sinks dissipate heat in three axes so output stays
+                high even in Gulf summers.
+              </p>
+            </article>
+            <article class="story-card" data-reveal>
+              <h2>Layer 03 — Intelligence</h2>
+              <p>
+                Smart drivers integrate DALI 2, PLC, and LTE for adaptive lighting that
+                listens to citywide control rooms.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="layered-gallery" aria-labelledby="gallery-label">
+          <div class="gallery-stage">
+            <img
+              class="gallery-layer"
+              src="sprites/50-240W-7.png"
+              alt="alroufLED modular street light 240W variant"
+              loading="lazy"
+            />
+            <img
+              class="gallery-layer"
+              src="sprites/50-240W-8.png"
+              alt="Exploded module detail"
+              loading="lazy"
+            />
+            <img
+              class="gallery-layer"
+              src="sprites/50-240W-6.png"
+              alt="Control module detail"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-copy" data-reveal>
+            <h2 id="gallery-label">Immersive storytelling</h2>
+            <p>
+              Layered imagery and 3D motion blend into a single narrative. Hover and swipe
+              to reveal the mechanical choreography behind the product.
+            </p>
+          </div>
+        </section>
+
+        <section class="engineering" id="engineering">
+          <div class="engineering__panel" data-reveal>
+            <h2>Precision-engineered backbone</h2>
+            <ul>
+              <li>
+                <strong>Monolith chassis</strong> — CNC-machined aluminum body with a marine
+                grade powder coat.
+              </li>
+              <li>
+                <strong>Adaptive lumen logic</strong> — Smart sensors tune output while
+                keeping CCT rock steady.
+              </li>
+              <li>
+                <strong>Service-first approach</strong> — Tool-free driver swaps and magnetic
+                access points.
+              </li>
+            </ul>
+          </div>
+          <div class="engineering__visual" data-reveal>
+            <div class="engineering-card">
+              <img src="sprites/50-240W-5.png" alt="Cooling fins detail" loading="lazy" />
+              <div class="card-copy">
+                <h3>Heat dispersion mastered</h3>
+                <p>
+                  The fin geometry expands radiating surface area by 28%, preserving lumen
+                  density for 120,000+ hours.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section class="section section-cta" id="cta">
-          <header class="section-header">
-            <h2
-              class="u-wave"
-              data-en="Ready to assemble LeenAI?"
-              data-ar="جاهز لبناء لين للذكاء الاصطناعي؟"
-            >
-              Ready to assemble LeenAI?
-            </h2>
-            <p
-              data-en="[TBD]"
-              data-ar="[TBD]"
-            >
-              [TBD]
-            </p>
-          </header>
-          <div class="hero-ctas">
-            <a
-              class="btn primary"
-              href="mailto:hello@leen.ai"
-              data-en="Book Discovery"
-              data-ar="احجز جلسة"
-            >
-              Book Discovery
-            </a>
-            <a
-              class="btn ghost"
-              href="#"
-              data-en="Download SOW"
-              data-ar="حمّل نطاق العمل"
-            >
-              Download SOW
-            </a>
+        <section class="metrics" data-reveal>
+          <div class="metric">
+            <p class="metric-label">Peak efficacy</p>
+            <p class="metric-value">178 lm/W</p>
+          </div>
+          <div class="metric">
+            <p class="metric-label">Control protocols</p>
+            <p class="metric-value">DALI 2 · PLC · LTE</p>
+          </div>
+          <div class="metric">
+            <p class="metric-label">Operating range</p>
+            <p class="metric-value">-45°C → 55°C</p>
+          </div>
+          <div class="metric">
+            <p class="metric-label">Projected life</p>
+            <p class="metric-value">120,000 hrs</p>
           </div>
         </section>
       </main>
 
-      <aside class="progress-nav" aria-label="Section progress">
-        <ul>
-          <li>
-            <button type="button" data-target="#hero" aria-label="Hero"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#vision" aria-label="Vision"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#layers" aria-label="Ai-Factory Layers"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#kpis" aria-label="KPIs"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#timeline" aria-label="Timeline"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#services" aria-label="Services"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#methodology" aria-label="Methodology"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#pdpl" aria-label="PDPL"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#integrations" aria-label="Integrations"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#pricing" aria-label="Pricing"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#scope" aria-label="Scope"></button>
-          </li>
-          <li>
-            <button type="button" data-target="#cta" aria-label="CTA"></button>
-          </li>
-        </ul>
-      </aside>
+      <section class="cta" id="cta">
+        <div class="cta__panel" data-reveal>
+          <h2>Ready to light the street of the future?</h2>
+          <p>
+            Assemble a bespoke configuration with our lighting design studio. Swap optics,
+            simulate photometrics, and deploy faster with AR visualisations.
+          </p>
+          <div class="cta__actions">
+            <a
+              class="cta-primary"
+              href="https://wa.me/966000000000"
+              target="_blank"
+              rel="noreferrer"
+              data-analytics-event="cta_whatsapp_click"
+            >
+              WhatsApp our team
+            </a>
+            <a class="cta-secondary" href="mailto:design@alroufled.com">Book a session</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>© <span data-year></span> alroufLED. Designed for night and narrative.</p>
+      </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
-    <script type="module" src="app.js"></script>
   </body>
 </html>
