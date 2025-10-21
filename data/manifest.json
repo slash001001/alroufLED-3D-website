@@ -1,0 +1,56 @@
+{
+  "models": [
+    "assets/ufo5-200W.stp",
+    "public/models/ufo5-200W.glb",
+    "docs/models/ufo5-200W.glb"
+  ],
+  "images": [
+    "public/sprites/290W-1.png",
+    "public/sprites/50-240W-5.png",
+    "public/sprites/50-240W-6.png",
+    "public/sprites/50-240W-7.png",
+    "public/sprites/50-240W-8.png",
+    "docs/sprites/290W-1.png",
+    "docs/sprites/50-240W-5.png",
+    "docs/sprites/50-240W-6.png",
+    "docs/sprites/50-240W-7.png",
+    "docs/sprites/50-240W-8.png"
+  ],
+  "videos": [],
+  "pdfs": [],
+  "html": [
+    "index.html",
+    "viewer.html",
+    "docs/index.html",
+    "docs/viewer.html",
+    "cad-web-viewer-ufo5-200W/public/index.html"
+  ],
+  "styles": [
+    "styles.css",
+    "src/styles/viewer.css"
+  ],
+  "scripts": [
+    "src/main.tsx",
+    "src/site.ts",
+    "src/viewer-page.tsx",
+    "src/ViewerApp.tsx",
+    "src/3d/ProductViewer.tsx",
+    "src/3d/loaders.ts",
+    "src/ui/FallbackHero.tsx",
+    "src/ui/ViewerHud.tsx",
+    "src/ui/ViewerErrorBoundary.tsx",
+    "src/lib/analytics.ts",
+    "src/lib/gpu.ts",
+    "docs/assets/main-Fj_uIIyi.js",
+    "docs/assets/site-CL_TlaTb.js",
+    "docs/assets/ViewerApp-DubN46oe.js",
+    "docs/assets/viewer-DgCUuBJj.js",
+    "cad-web-viewer-ufo5-200W/public/src/viewer.js",
+    "eslint.config.js",
+    "vite.config.ts"
+  ],
+  "markdown": [
+    "README.md",
+    "cad-web-viewer-ufo5-200W/README.md"
+  ]
+}

@@ -3,10 +3,12 @@ import { useGLTF } from "@react-three/drei";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import type { Group, Mesh, Material } from "three";
 
-const DRACO_CDN =
-  "https://www.gstatic.com/draco/versioned/decoders/1.5.7/";
+const DRACO_DECODER_PATH = new URL(
+  "decoders/draco/",
+  import.meta.env.BASE_URL
+).toString();
 
-useGLTF.setDecoderPath(DRACO_CDN);
+useGLTF.setDecoderPath(DRACO_DECODER_PATH);
 // Cast while upstream typings catch up with the Meshopt helper.
 const gltfWithMeshopt = useGLTF as unknown as {
   setMeshoptDecoder?: (decoder: unknown) => void;
